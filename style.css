@@ -110,3 +110,36 @@ h3 {
 table {
   width: 100%;
 }
+
+@media (max-width: 600px) {
+  body {
+    background-size: 100%;
+    background-repeat: repeat;
+  }
+
+  .grid {
+    flex-direction: column;
+  }
+
+  .mid {
+    width: 97%;
+  }
+
+  .flip-clock-divider.days,
+  .flip:nth-child(0),
+  .flip:nth-child(1),
+  .flip:nth-child(2),
+  .flip:nth-child(3) {
+    display: none;
+  }
+
+  .col:nth-child(3),
+  .flip-clock-divider.hours .flip-clock-dot {
+    display: none;
+  }
+
+  #box {
+    max-width: unset;
+    width: unset;
+  }
+}
