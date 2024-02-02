@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css">
+	<link rel="stylesheet" type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/icon.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.js"></script>
+	<title>School</title>
+</head>
+
+<body>
+	<div class="img">
+	</div>
+	<br>
+	<br>
+	<h1><span>haysky.com</span></h1>
+	<img class="rocket one" src="https://www.lumberjackdigital.com/wp-content/uploads/2022/11/animation_500_la6nksuh.gif">
+	<div class="clock" style="margin:2em;"></div>
+	<i class="circle notch loading blue huge icon"></i>
+	<img class="rocket two" src="rocket.gif">
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$('.icon').hide();
+			var clock;
+
+			clock = $('.clock').FlipClock({
+				clockFace: 'DailyCounter',
+				autoStart: false,
+				callbacks: {
+					stop: function () {
+						$('.clock').fadeOut(2000);
+						$(".rocket").animate({
+							bottom: '+=500px'
+						}, 3000);
+						setTimeout(function () {
+							$('.icon').show();
+						}, 1000);
+						setTimeout(function () {
+							window.location.href = "https://haysky.com/";
+						}, 2000);
+					}
+				}
+			});
+			clock.setTime(300);
+			clock.setCountdown(true);
+			clock.start();
+		});
+	</script>
+	<style type="text/css">
+		table {
+			width: 100%;
+		}
+
+		h1 span {
+			background: white;
+			border: 2px solid;
+			padding: 5px 40px;
+			border-radius: 20px;
+		}
+
+		h1 {
+			font-size: 45px;
+			font-family: Arial;
+			text-align: center;
+			position: relative;
+			top: 140px;
+		}
+
+		td:first-child,
+		td:last-child {
+			width: 20% !important;
+			text-align: center;
+		}
+
+		.icon {
+			position: absolute;
+			top: 320px;
+			left: 620px;
+		}
+
+		.clock {
+			position: absolute;
+			width: 700px;
+			top: 280px;
+			left: 350px;
+		}
+
+		.rocket {
+			height: 300px;
+			/*			top: 140px;*/
+			position: absolute;
+		}
+
+		.rocket.one {
+			left: 90px;
+		}
+
+		.rocket.two {
+			right: 90px;
+		}
+
+		body {
+			background-image: url('bg.jpg');
+			/*			background-image: url('https://c4.wallpaperflare.com/wallpaper/165/275/593/colorful-windows-10-gradient-minimalism-soft-gradient-hd-wallpaper-preview.jpg');*/
+			background-repeat: no-repeat;
+			background-position-x: 0;
+			background-size: 100% 100vh;
+			background-color: #7ad3f2;
+			background-position: top;
+		}
+	</style>
+</body>
+
+</html>
