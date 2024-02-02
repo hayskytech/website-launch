@@ -10,23 +10,87 @@
 	<link rel="stylesheet" type="text/css"
 		href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/components/icon.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.js"></script>
+	<link rel="stylesheet" href="style.css">
 	<title>School</title>
 </head>
 
 <body>
-	<div class="img">
+
+	<dialog id="box">
+		<h2>Settings</h2>
+		<form id="mainform">
+			<table>
+				<tr>
+					<td>Website:</td>
+					<td><input type="text" name="website"></td>
+				</tr>
+				<tr>
+					<td>Duration (sec):</td>
+					<td><input type="number" name="duration"></td>
+				</tr>
+				<tr>
+					<td>Description</td>
+					<td><textarea name="desc" rows="5" cols="23"></textarea></td>
+				</tr>
+			</table>
+		</form>
+		<button form="mainform">Save</button>
+		<button onclick="closeBox()">Cancel</button>
+	</dialog>
+
+	<script>
+		box = document.getElementById('box')
+		const urlParams = new URLSearchParams(window.location.search);
+		let website = urlParams.get('website')
+		if (!website) {
+			website = 'haysky.com'
+		}
+		const duration = parseInt(urlParams.get('duration'))
+		const desc = urlParams.get('desc')
+		console.log(desc);
+		function showBox() {
+			$('input[name=website]').val(website)
+			$('input[name=duration]').val(duration)
+			$('textarea[name=desc]').val(desc)
+			box.showModal()
+		}
+		function closeBox() {
+			box.close()
+		}
+		function closeBox() {
+			box.close()
+		}
+	</script>
+
+
+	<div class="parent">
+		<h1><span id="website">haysky.com</span></h1>
+		<div class="grid">
+			<div class="col">
+				<img class="rocket one" src="rocket.gif">
+			</div>
+			<div class="col mid">
+				<h3>Time remaining for the launch</h3>
+				<div class="clock"></div>
+				<i class="circle notch loading blue huge icon"></i>
+				<p id="desc">Coming soon...</p>
+			</div>
+			<div class="col">
+				<img class="rocket two" src="rocket.gif">
+			</div>
+		</div>
 	</div>
-	<br>
-	<br>
-	<h1><span>haysky.com</span></h1>
-	<img class="rocket one" src="https://www.lumberjackdigital.com/wp-content/uploads/2022/11/animation_500_la6nksuh.gif">
-	<div class="clock" style="margin:2em;"></div>
-	<i class="circle notch loading blue huge icon"></i>
-	<img class="rocket two" src="rocket.gif">
+	<i class="cog large icon" onclick="showBox()"></i>
 
 	<script type="text/javascript">
 		$(document).ready(function () {
-			$('.icon').hide();
+			$('.loading.icon').hide();
+			if (website) {
+				$('#website').html(website)
+			}
+			if (desc) {
+				$('#desc').html(desc)
+			}
 			var clock;
 
 			clock = $('.clock').FlipClock({
@@ -36,85 +100,30 @@
 					stop: function () {
 						$('.clock').fadeOut(2000);
 						$(".rocket").animate({
-							bottom: '+=500px'
+							bottom: '+=1000px'
 						}, 3000);
 						setTimeout(function () {
 							$('.icon').show();
 						}, 1000);
-						setTimeout(function () {
-							window.location.href = "https://haysky.com/";
-						}, 2000);
+						if (!website.includes('http://') && !website.includes('https://')) {
+							website = 'http://' + website;
+						}
+						window.location.href = website;
+						// setTimeout(function () {
+						// }, 1000);
 					}
 				}
 			});
-			clock.setTime(300);
+			if (duration) {
+				clock.setTime(duration)
+				console.log(duration);
+			} else {
+				clock.setTime(300);
+			}
 			clock.setCountdown(true);
 			clock.start();
 		});
 	</script>
-	<style type="text/css">
-		table {
-			width: 100%;
-		}
-
-		h1 span {
-			background: white;
-			border: 2px solid;
-			padding: 5px 40px;
-			border-radius: 20px;
-		}
-
-		h1 {
-			font-size: 45px;
-			font-family: Arial;
-			text-align: center;
-			position: relative;
-			top: 140px;
-		}
-
-		td:first-child,
-		td:last-child {
-			width: 20% !important;
-			text-align: center;
-		}
-
-		.icon {
-			position: absolute;
-			top: 320px;
-			left: 620px;
-		}
-
-		.clock {
-			position: absolute;
-			width: 700px;
-			top: 280px;
-			left: 350px;
-		}
-
-		.rocket {
-			height: 300px;
-			/*			top: 140px;*/
-			position: absolute;
-		}
-
-		.rocket.one {
-			left: 90px;
-		}
-
-		.rocket.two {
-			right: 90px;
-		}
-
-		body {
-			background-image: url('bg.jpg');
-			/*			background-image: url('https://c4.wallpaperflare.com/wallpaper/165/275/593/colorful-windows-10-gradient-minimalism-soft-gradient-hd-wallpaper-preview.jpg');*/
-			background-repeat: no-repeat;
-			background-position-x: 0;
-			background-size: 100% 100vh;
-			background-color: #7ad3f2;
-			background-position: top;
-		}
-	</style>
 </body>
 
 </html>
