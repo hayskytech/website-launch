@@ -47,7 +47,6 @@
 		}
 		const duration = parseInt(urlParams.get('duration'))
 		const desc = urlParams.get('desc')
-		console.log(desc);
 		function showBox() {
 			$('input[name=website]').val(website)
 			$('input[name=duration]').val(duration)
@@ -74,6 +73,10 @@
 				<div class="clock"></div>
 				<i class="circle notch loading blue huge icon"></i>
 				<p id="desc">Coming soon...</p>
+				<audio controls autoplay loop="true">
+					<source src="https://ipssozop24.com/wp-content/uploads/2024/02/launching-bg.mp3">
+					Your browser does not support the audio tag.
+				</audio>
 			</div>
 			<div class="col">
 				<img class="rocket two" src="rocket.gif">
@@ -116,7 +119,6 @@
 			});
 			if (duration) {
 				clock.setTime(duration)
-				console.log(duration);
 			} else {
 				clock.setTime(300);
 			}
